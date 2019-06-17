@@ -1,0 +1,112 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+  
+  <mapper namespace="com.exam.mapper.AdminMapper">
+  
+  	<select id="adminMemberList" resultType="memberVO">
+		SELECT member_id, password, name, gender, email, reg_date
+		FROM member
+	</select>
+	
+  	<select id="adminMemberIdSearch" resultType="memberVO">
+		SELECT member_id, password, name, gender, email, reg_date, book_overdue
+		FROM member
+		<where>
+			<if test="memberId != null and memberId != ''">
+				<!-- subject LIKE '%' || #{search} || '%' --> 
+				member_id LIKE CONCAT ('%', #{memberId}, '%')
+			</if>
+		</where>
+		ORDER BY member_id ASC
+	</select>
+	
+	<resultMap type="bookReservationVO" id="selectbookReservationAndTimeMap">
+		<id column= "book_code" property = "bookCode"/>
+		<result column = "member_id" property = "memberId"/>
+		<result column = "book_extension" property = "bookExtension"/>
+		<result column = "book_status" property = "bookStatus"/>
+		<collection property="resTimeVO" ofType="resTimeVO">
+			<result column = "book_code" property = "timeCode"/>
+			<result column = "start_time" property = "startTime"/>
+			<result column = "end_time" property = "endTime"/>
+		</collection>
+	</resultMap>
+	
+	  	<select id="selectbookReservationAndTime" resultMap="selectbookReservationAndTimeMap">
+		SELECT substring_index(br.book_code, 'book',-1) as book_code, br.member_id, br.book_extension, br.book_status, rt.start_time, rt.end_time
+		FROM book_reservation br LEFT JOIN res_time rt
+		ON br.book_code = rt.time_code
+		WHERE br.book_code = #{bookCode}
+	</select>
+	
+	<select id="getSeqBoardNum" resultType="int">
+		select IFNULL(max(num), 0)+1 FROM<!-- seq_board.nextval from dual --> adminboard
+	</select>
+
+	<insert id="insertBoard">
+		<!-- 
+		<selectKey order="BEFORE" resultType="int" keyProperty="num">
+			select seq_board.nextval from dual
+		</selectKey>
+		 -->
+		INSERT INTO adminboard (num, name, pass, subject, content, re_ref, re_lev, re_seq, readcount, ip, reg_date) 
+		VALUES (#{num}, #{name}, #{pass}, #{subject}, #{content}, #{reRef}, #{reLev}, #{reSeq}, #{readcount}, #{ip}, CURRENT_TIMESTAMP)
+	</insert>
+	
+	
+	<select id="getBoards" resultType="adminVO">
+		SELECT * 
+		FROM adminboard
+		<where>
+			<if test="search != null and search != ''">
+				<!-- subject LIKE '%' || #{search} || '%' --> 
+				subject LIKE CONCAT ('%', #{search}, '%')
+			</if>
+		</where>
+		ORDER BY re_ref DESC, re_seq ASC
+		LIMIT #{amount} OFFSET #{startRow}
+		<!-- LIMIT #{startRow}, #{amount} -->
+	</select>
+	
+	
+	<select id="getBoardCount" resultType="int">
+		SELECT COUNT(*) 
+		FROM adminboard
+		<where>
+			<if test="search != null and search != ''">
+				<!-- subject LIKE '%' || #{search} || '%'  -->
+				subject LIKE CONCAT ('%', #{search}, '%')
+			</if>
+		</where>
+	</select>
+	
+	<update id="updateReadcount">
+		UPDATE adminboard 
+		SET readcount = readcount+1 
+		WHERE num = #{num}
+	</update>
+	
+	<select id="getBoard" resultType="adminVO">
+		SELECT * FROM adminboard WHERE num = #{num}
+	</select>
+	
+	<update id="updateBoard">
+		UPDATE adminboard 
+		SET name=#{name}, subject=#{subject}, content=#{content} 
+		WHERE num=#{num} 
+	</update>
+	
+	<delete id="deleteBoard">
+		DELETE FROM adminboard WHERE num = #{num}
+	</delete>
+	
+	<update id="updateReplyGroupSeq">
+		UPDATE adminboard 
+		SET re_seq = re_seq + 1 
+		WHERE re_ref = #{reRef} 
+		AND re_seq > #{reSeq} 
+	</update>
+  </mapper>
+

@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.exam.mapper.CommentMapper">
+
+	<select id="commentCount" resultType="int">
+		SELECT
+		COUNT(*)
+		FROM comment
+	</select>
+
+	<select id="list" resultType="commentVO">
+		SELECT *
+		FROM comment
+		where bno = #{bno}
+		ORDER BY re_ref DESC, re_seq ASC
+
+		<!-- SELECT * FROM comment WHERE bno = #{bno} ORDER BY cno DESC -->
+	</select>
+
+	<select id="selectreply" resultType="_int">
+		SELECT IFNULL(MAX(cno),0)+1
+		FROM comment
+	</select>
+
+	<insert id="create">
+		INSERT INTO comment (cno, bno, comment, writer, re_ref, re_lev, re_seq, reg_date)
+		VALUES(#{cno}, #{bno}, #{comment}, #{writer}, #{reRef}, #{reLev}, #{reSeq}, CURRENT_TIMESTAMP)
+	</insert>
+
+
+
+	<update id="update">
+		UPDATE comment
+		SET
+		comment = #{comment},
+		reg_date = CURRENT_TIMESTAMP
+		WHERE cno = #{cno}
+	</update>
+
+	<delete id="delete" parameterType="int">
+		DELETE FROM comment
+		WHERE cno = #{cno}
+	</delete>
+
+
+
+	<update id="updateReplyGroupSeq">
+		UPDATE comment
+		set re_seq = re_seq + 1,
+		re_lev = re_lev
+		where
+		re_ref = #{reRef} and re_seq > #{reSeq}
+		
+	</update>
+
+
+
+
+</mapper>

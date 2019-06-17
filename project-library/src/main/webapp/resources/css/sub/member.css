@@ -1,0 +1,107 @@
+/* 로그인  */
+label {
+	height: 35px;
+	width: 80px;
+}
+
+.submit, .cancel {
+	display: inline-block;
+	padding: 5px 13px;
+	font-size: 13px;
+	cursor: pointer;
+	text-align: center;
+	text-decoration: none;
+	outline: none;
+	color: #fff;
+	background-color: #2e2f6c;
+	border: none;
+	border-radius: 7px;
+	box-shadow: 2px 4px 0px 0px #999;
+}
+
+.submit:hover {
+	background-color: #383d41
+}
+
+.cancel:hover {
+	background-color: #383d41
+}
+
+.submit:active {
+	background-color: #3e8e41;
+	box-shadow: 0 5px #666;
+	transform: translateY(4px);
+}
+
+.cancel:active {
+	background-color: #3e8e41;
+	box-shadow: 0 5px #666;
+	transform: translateY(4px);
+}
+
+.username, .password {
+	height: 35px;
+	width: 200px;
+	border-radius: 7px;
+}
+
+/* 회원가입 */
+label {
+	height: 35px;
+	width: 135px;
+}
+
+.gender {
+	height: 35px;
+	width: 125px;
+	text-align: -webkit-auto;
+}
+
+input {
+	border-radius: 7px;
+}
+
+.submit, .cancel {
+	display: inline-block;
+	padding: 5px 13px;
+	font-size: 13px;
+	cursor: pointer;
+	text-align: center;
+	text-decoration: none;
+	outline: none;
+	color: #fff;
+	background-color: #2e2f6c;
+	border: none;
+	border-radius: 7px;
+	box-shadow: 2px 4px 0px 0px #999;
+}
+
+.dup {
+	background-color: white;
+	color: black;
+	border: 2px solid #2e2f6c;
+}
+
+.submit:hover {
+	background-color: #383d41
+}
+
+.cancel:hover {
+	background-color: #383d41
+}
+
+.dup:hover {
+	background-color: #6c757d29
+}
+
+.submit:active {
+	background-color: #3e8e41;
+	box-shadow: 0 5px #666;
+	transform: translateY(4px);
+}
+
+.cancel:active {
+	background-color: #3e8e41;
+	box-shadow: 0 5px #666;
+	transform: translateY(4px);
+}

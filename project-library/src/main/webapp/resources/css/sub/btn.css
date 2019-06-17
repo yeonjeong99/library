@@ -1,0 +1,135 @@
+.btn_set {
+	padding: 10px 0;
+	overflow: hidden
+}
+
+a.btn_board {
+	background: #696969;
+	color: #fff;
+	padding: 8px 25px;
+}
+
+a.btn_board:hover, .btn_board.active {
+	background: #000;
+	color: #fff;
+}
+
+a.blue {
+	background: #2452a7;
+	color: #fff;
+	padding: 8px 25px;
+}
+
+a.c_blue {
+	background: #8d9cae;
+	color: #fff;
+	padding: 8px 25px;
+}
+
+.btn_con {
+	display: inline-block;
+	margin-bottom: 5px;
+	background-color: #fff;
+	background-position: 90% center;
+	background-repeat: no-repeat;
+	padding: 10px 50px 10px 10px;
+	font-size: 12px;
+	color: #000;
+	border: 1px solid #393939;
+	color: #313131;
+	white-space: nowrap;
+}
+
+.btn_con:hover {
+	background-color: #f6f6f6;
+	background-position: 90% center;
+	background-repeat: no-repeat;
+}
+
+.btn_open, .btn_open:hover {
+	background-image: url(/book/resources/images/sub/open.png);
+}
+
+.btn_close, .btn_close:hover {
+	background-image: url(/book/resources/images/sub/close.png);
+}
+
+.btn_more, .btn_more:hover {
+	background-image: url(/book/resources/images/sub/more.png);
+}
+
+.btn_down, .btn_down:hover {
+	background-image: url(/book/resources/images/sub/down.png);
+}
+
+.btn_link, .btn_link:hover {
+	background-image: url(/book/resources/images/sub/blank.png);
+}
+
+a.gr {
+	background: #333;
+	color: #fff;
+	padding: 5px 5px;
+	font-size: 12px;
+}
+
+a.gg {
+	background: #ea1600;
+	color: #fff;
+	padding: 5px 5px;
+	font-size: 12px;
+}
+
+.btn_con1 {
+	display: inline-block;
+	margin-bottom: 5px;
+	background-color: #ddfdce;
+	border-radius: 2px;
+	background-position: 90% center;
+	background-repeat: no-repeat;
+	padding: 3px 8px;
+	font-size: 12px;
+	color: #fff;
+	border: 1px solid #393939;
+	color: #313131;
+	white-space: nowrap;
+}
+
+.btn_con1:hover {
+	background-color: #f6f6f6;
+	background-position: 90% center;
+	background-repeat: no-repeat;
+}
+
+.btn_con2 {
+	display: inline-block;
+	margin-bottom: 5px;
+	border-radius: 2px;
+	background-position: 90% center;
+	background-repeat: no-repeat;
+	padding: 2px 8px;
+	font-size: 12px;
+	color: #fff;
+	border: 1px solid #393939;
+	color: #313131;
+	white-space: nowrap;
+}
+
+.btn_con2:hover {
+	background-position: 90% center;
+	background-repeat: no-repeat;
+}
+
+.btnwriter{
+	border-radius:.25em;
+	background: #777;
+    color: #fff;
+    padding: 0px 15px;
+    line-height: 35px
+}
+.btnwriter:hover{
+	background: #ff4f4e;
+    color: #fff;
+    padding: 0px 15px;
+    line-height: 35px
+}

@@ -1,0 +1,115 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.exam.mapper.ReservationMapper">
+
+	<insert id="insertBookReservation">
+		INSERT INTO book_reservation
+		(book_code,member_id,book_extension,book_status)
+		VALUES
+		(#{bookCode},#{memberId}, #{bookExtension}, #{bookStatus})
+	</insert>
+	
+	<update id="updateDeskReservation">
+		UPDATE reading_room SET desk_status = #{deskStatus}, member_id = #{memberId} WHERE desk_no = #{deskNo} 
+	</update>
+	
+	<update id="endDeskReservation">
+		UPDATE reading_room SET desk_status = 0 , member_id = null 
+		WHERE desk_no IN 
+		(SELECT SUBSTRING_INDEX(time_code, 'desk', -1) FROM res_time 
+		WHERE 
+		 <![CDATA[
+		end_time < current_time 
+		]]>
+		AND time_code LIKE CONCAT( 'desk' ,'%'))
+	</update>
+	
+	<select id="getReadingRoom" resultType="readingRoomVO">
+		SELECT desk_no, member_id, desk_status  FROM reading_room
+		ORDER BY sort_num ASC
+	</select>
+
+	<select id="countReadingRoomById" resultType="int">
+		SELECT COUNT(*) FROM reading_room WHERE member_id = #{memberId}
+	</select>
+	
+	<delete id="deleteReservation">
+		DELETE FROM book_reservation 
+		WHERE book_code = #{bookCode}
+	</delete>
+	
+	<select id="overdueMemberId" resultType="bookReservationVO">
+		SELECT * FROM book_reservation 
+		WHERE book_code IN 
+		(SELECT time_code FROM res_time 
+		WHERE 
+		 <![CDATA[
+		end_time < CURRENT_TIME
+		]]>
+		)
+	</select>
+	
+	<insert id="insertOverdueNotice" parameterType="noticeBoardVO">
+		INSERT INTO  notice_board (member_id, subject, content, date) 
+		VALUE (#{memberId}, #{subject}, #{content}, CURRENT_TIMESTAMP)
+	</insert>
+	
+	<resultMap type="bookReservationVO" id="rservationOverDueSearchMap">
+		<id column= "book_res_no" property = "bookResNo"/>
+		<result column = "book_code" property = "bookCode"/>
+		<result column = "member_id" property = "memberId"/>
+		<result column = "book_extension" property = "bookExtension"/>
+		<result column = "book_status" property = "bookStatus"/>
+		<collection property="resTimeVO" ofType="resTimeVO">
+			<result column = "book_code" property = "timeCode"/>
+			<result column = "start_time" property = "startTime"/>
+			<result column = "end_time" property = "endTime"/>
+		</collection>
+	</resultMap>
+
+	<select id="reservationMemberAllSearch" resultMap="rservationOverDueSearchMap">
+		SELECT br.book_res_no, br.book_code, br.member_id, br.book_extension, br.book_status, rt.time_code, rt.start_time, rt.end_time
+		FROM book_reservation br LEFT JOIN res_time rt
+		ON br.book_code = rt.time_code
+		ORDER BY rt.end_time DESC
+	</select>
+	
+	<select id="getBookisRental" resultType="_int">
+		SELECT count(*)
+		FROM book_reservation
+		WHERE book_code =CONCAT ('book', #{bookCode})
+	</select>
+	
+		<select id="getMemberRentalCount" resultType="_int">
+		SELECT count(*)
+		FROM book_reservation
+		WHERE member_id =#{memberId}
+	</select>
+	
+	
+	<select id="getAllBookHistoryList" resultType="bookLogVO">
+		SELECT *
+		FROM book_log
+		ORDER BY return_date DESC
+	</select>
+	
+	<select id = "getOverdueMemberIdRentalBook" resultType="bookReservationVO">
+		SELECT * 
+		FROM book_reservation 
+		WHERE book_code IN (
+			SELECT time_code 
+			FROM res_time 
+			WHERE
+			end_time BETWEEN (current_timestamp - interval 1 day) AND current_timestamp
+			)
+	</select>
+	
+	<update id = "increaseMemberOverdue" parameterType="memberVO">
+		UPDATE member SET book_overdue = (book_overdue+1)
+		WHERE member_id = #{memberId}
+	</update>
+	
+
+</mapper>

@@ -1,0 +1,182 @@
+/* 푸터가 아니라 사이드 메뉴바 */
+/* .fix-layout {
+	position: relative;
+	max-width: 1200px;
+	margin-left: auto;
+	margin-right: auto;
+	box-sizing: border-box;
+}
+
+header>.fix-layout, section>.fix-layout, footer>.fix-layout {
+	padding: 0 0px;
+}
+
+@media all and (max-width: 1000px) {
+	.fix-layout {
+		position: static;
+	}
+} */
+
+/* base  */
+ul, ol, li, dl, menu {
+	list-style: none
+}
+
+a, a:link, a:visited {
+	color: #666;
+	text-decoration: none
+}
+
+/* layout */
+.fix-layout {
+	position: relative;
+	box-sizing: border-box;
+	
+}
+
+/************************************************
+	Footer
+*************************************************/
+footer {
+	clear: both;
+	color: #848484;
+	text-align: left;
+	border-top: 1px solid #b0b0b0;
+	min-height: 100px;
+	
+}
+
+
+footer ul.foot_lng  li {
+	float: left;
+	padding: 0 18px;
+	font-size: 15px;
+	border-right: 1px solid #cecece;
+	font-weight: 500;
+	margin-bottom: 15px;
+	
+	
+}
+
+footer ul.foot_lng  li:first-child {
+	padding-left: 0px;
+}
+
+footer ul.foot_lng  li:first-child a {
+	color: #ee5533;
+}
+
+footer ul.foot_lng  li:last-child {
+	border-right: 0px;
+}
+
+footer p {
+	clear: both;
+	font-size: 13px;
+	line-height: 20px;
+	font-family: 'Nanum Gothic';
+	font-weight: bold;
+	text-align: center;
+}
+
+footer p a {
+	color: #848484;
+	text-decoration: none;
+}
+
+footer ul.total {
+	position: absolute;
+	right: 0px;
+	top: 0px;
+	font-size: 13px;
+	color: #000;
+	text-align: right;
+}
+
+footer ul.total li span {
+	color: #666;
+	width: 400px;
+	float: right;
+	width: 90px;
+}
+
+@media all and (max-width: 1000px) {
+	footer p {
+		margin-left: 10px;
+	}
+	footer ul.foot_lng {
+		margin-left: 10px;
+	}
+	footer ul.total {
+		display: none;
+	}
+}
+
+@media all and (max-width: 600px) {
+	footer {
+		padding-top: 10px;
+		min-height: 80px;
+	}
+	footer p {
+		text-align: center;
+		font-size: 11px;
+	}
+	footer p span.tel {
+		display: block;
+	}
+	footer p span.copy {
+		
+	}
+	footer ul.foot_lng {
+		display: none;
+	}
+}
+
+@media all and (max-width: 500px) {
+	footer {
+		min-height: 60px;
+	}
+	footer p span.copy {
+		display: none;
+	}
+}
+
+.top_btn {
+	position: fixed;
+	cursor: pointer;
+	background: url(/book/resources/images/sub/btn_go-top.png) no-repeat;
+	width: 90px;
+	height: 90px;
+	bottom: 80px;
+	right: 1%;
+	display: none;
+	text-indent: -88888888888px;
+}
+
+@media screen and (max-width: 1214px) {
+	.top_btn {
+		left: auto;
+		margin-left: 0;
+		right: 10px;
+	}
+	
+ a:link, a:visited {
+	/* color: #666; */
+	text-decoration: none
+}
+
+a{
+	color: #666;
+	text-decoration: none
+}
+
+a:hover, a:focus, a:active {
+	text-decoration: none;
+}
+
+ul, ol, li, dl, menu {
+	list-style: none;
+}
+	
+}
+

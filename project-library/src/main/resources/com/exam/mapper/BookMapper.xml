@@ -1,0 +1,117 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.exam.mapper.BookMapper">
+
+	<resultMap type="bookVO" id="getBookListMap">
+		<id column="book_no" property="bookNo" />
+		<result column="book_id" property="bookId" />
+		<result column="title" property="title" />
+		<result column="author" property="author" />
+		<result column="vol" property="vol" />
+		<result column="publisher" property="publisher" />
+		<result column="pub_year" property="pubYear" />
+		<result column="price" property="price" />
+		<result column="isbn" property="isbn" />
+		<result column="isbn_sub_code" property="isbnSubCode" />
+		<collection property="bookReservationVO"
+			ofType="BookReservationVO">
+			<result column="book_res_no" property="bookResNo" />
+			<result column="book_code" property="bookCode" />
+			<result column="member_id" property="memberId" />
+			<result column="book_extension" property="bookExtension" />
+			<result column="book_status" property="bookStatus" />
+		</collection>
+	</resultMap>
+
+	<select id="getBookList" resultMap="getBookListMap">
+		SELECT b.book_no,b.book_id, b.title, b.author, b.vol, b.publisher,
+		b.pub_year, b.price, b.isbn, b.isbn_sub_code, br.book_status
+		FROM book
+		b LEFT JOIN book_reservation br
+		ON b.book_no =
+		substring_index(br.book_code, 'book',-1)
+		<where>
+			<if test="bookSearchDTO.searchKeywordA != null and bookSearchDTO.searchKeywordA != ''">
+            <!-- subject LIKE '%' || #{search} || '%' -->
+            ${bookSearchDTO.searchTypeA} LIKE CONCAT ('%', #{bookSearchDTO.searchKeywordA}, '%')
+         </if>
+         
+         <if test="bookSearchDTO.searchKeywordB != null and bookSearchDTO.searchKeywordB!= ''">
+            <!-- subject LIKE '%' || #{search} || '%' -->
+            ${bookSearchDTO.searchJoinA} ${bookSearchDTO.searchTypeB} LIKE CONCAT ('%', #{bookSearchDTO.searchKeywordB}, '%')
+         </if>
+         
+         <if test="bookSearchDTO.searchKeywordC != null and bookSearchDTO.searchKeywordC != ''">
+            <!-- subject LIKE '%' || #{search} || '%' -->
+            ${bookSearchDTO.searchJoinB} ${bookSearchDTO.searchTypeC} LIKE CONCAT ('%', #{bookSearchDTO.searchKeywordC}, '%')
+         </if>
+
+		</where>
+		ORDER BY title ASC
+		LIMIT #{amount} OFFSET #{startRow}
+		<!-- LIMIT #{startRow}, #{amount} -->
+	</select>
+
+	<select id="getBookInfo" resultType="bookVO">
+		SELECT b.book_no,b.book_id,
+		b.title, b.author, b.vol, b.publisher, b.pub_year, b.price, b.isbn,
+		b.isbn_sub_code
+		FROM book b
+		WHERE b.book_no = #{bookCode}
+
+	</select>
+
+
+
+	<select id="getBookCount" resultType="int">
+		SELECT COUNT(*)
+		FROM book
+		<where>
+			<if test="bookSearchDTO.searchKeywordA != null and bookSearchDTO.searchKeywordA != ''">
+            <!-- subject LIKE '%' || #{search} || '%' -->
+            ${bookSearchDTO.searchTypeA} LIKE CONCAT ('%', #{bookSearchDTO.searchKeywordA}, '%')
+         </if>
+         
+         <if test="bookSearchDTO.searchKeywordB != null and bookSearchDTO.searchKeywordB!= ''">
+            <!-- subject LIKE '%' || #{search} || '%' -->
+            ${bookSearchDTO.searchJoinA} ${bookSearchDTO.searchTypeB} LIKE CONCAT ('%', #{bookSearchDTO.searchKeywordB}, '%')
+         </if>
+         
+         <if test="bookSearchDTO.searchKeywordC != null and bookSearchDTO.searchKeywordC != ''">
+            <!-- subject LIKE '%' || #{search} || '%' -->
+            ${bookSearchDTO.searchJoinB} ${bookSearchDTO.searchTypeC} LIKE CONCAT ('%', #{bookSearchDTO.searchKeywordC}, '%')
+         </if>
+		</where>
+	</select>
+
+	<insert id="bookLogInsert">
+		INSERT INTO book_log (book_no, author, title, vol, publisher, member_id, return_date)
+		VALUES(#{bookNo}, #{author}, #{title}, #{vol}, #{publisher}, #{memberId}, now()); 
+	</insert>
+	
+	<select id="getBookRentalInfo" resultType="bookVO">
+		SELECT b.book_no,b.book_id, b.title, b.author, b.vol, b.publisher, b.pub_year, b.price, b.isbn, b.isbn_sub_code
+		FROM book b 
+		<where>
+			<if test="bookCode != null and bookCode != ''">
+				<!-- subject LIKE '%' || #{search} || '%' --> 
+				b.book_no LIKE CONCAT (#{bookCode}, '%')
+			</if>
+		</where>
+	</select>
+
+	<select id="getBookRentalRank" resultType="bookLogVO">
+		SELECT *,
+		COUNT(*) as rental_count
+		FROM book_log
+		GROUP BY book_no
+		<![CDATA[ 
+		HAVING rental_count >= 1
+		]]>
+		ORDER BY rental_count DESC LIMIT 10
+
+	</select>
+
+</mapper>
