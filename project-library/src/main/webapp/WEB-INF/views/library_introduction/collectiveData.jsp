@@ -86,128 +86,28 @@
 <h2>소장자료현황</h2>
 <h3>도서</h3>
 
-<p>2019년 4월 1일 현재</p>
+<p>2019년 6월 18일 현재</p>
 
 <div class="mb_scroll">
 <table class="tbl_basic">
-	<caption>도서 총장서수(2019년 4월 1일 현재)안내</caption>
+	<caption>도서 총장서수(2019년 6월 18일 현재)안내</caption>
 	<thead>
 		<tr>
 			<th scope="col">구분</th>
-			<th scope="col">총류</th>
-			<th scope="col">철학</th>
-			<th scope="col">종교</th>
-			<th scope="col">사회과학</th>
-			<th scope="col">자연과학</th>
-			<th scope="col">기술과학</th>
-			<th scope="col">예술</th>
-			<th scope="col">언어</th>
-			<th scope="col">문학</th>
-			<th scope="col">역사</th>
 			<th scope="col">계</th>
 		</tr>
 	</thead>
 	<tbody>
 		<tr>
 			<td>자료수</td>
-			<td>13,102</td>
-			<td>15,556</td>
-			<td>9,828</td>
-			<td>57,231</td>
-			<td>12,224</td>
-			<td>23,487</td>
-			<td>14,498</td>
-			<td>11,617</td>
-			<td>98,454</td>
-			<td>25,996</td>
-			<td>281,993</td>
+			<td>2,609</td>
 		</tr>
 	</tbody>
 </table>
 </div>
 
-<h3>비도서</h3>
-
-<p>2019년 4월 1일 현재</p>
-
 <div class="mb_scroll">
-<table class="tbl_basic">
-	<caption>비도서 총장서수(2019년 4월 1일 현재)안내</caption>
-	<thead>
-		<tr>
-			<th scope="col">구분</th>
-			<th scope="col">총류</th>
-			<th scope="col">철학</th>
-			<th scope="col">종교</th>
-			<th scope="col">사회과학</th>
-			<th scope="col">자연과학</th>
-			<th scope="col">기술과학</th>
-			<th scope="col">예술</th>
-			<th scope="col">언어</th>
-			<th scope="col">문학</th>
-			<th scope="col">역사</th>
-			<th scope="col">계</th>
-		</tr>
-	</thead>
-	<tbody>
-		<tr>
-			<td>자료수</td>
-			<td>253</td>
-			<td>97</td>
-			<td>70</td>
-			<td>774</td>
-			<td>366</td>
-			<td>481</td>
-			<td>7,591</td>
-			<td>378</td>
-			<td>416</td>
-			<td>593</td>
-			<td>11,019</td>
-		</tr>
-	</tbody>
-</table>
-</div>
 
-<h3>작은도서관</h3>
-
-<p>2019년 4월 1일 현재</p>
-
-<div class="mb_scroll">
-<table class="tbl_basic">
-	<caption>작은도서관 총장서수(2019년 4월 1일 현재)안내</caption>
-	<thead>
-		<tr>
-			<th scope="col">구분</th>
-			<th scope="col">총류</th>
-			<th scope="col">철학</th>
-			<th scope="col">종교</th>
-			<th scope="col">사회과학</th>
-			<th scope="col">자연과학</th>
-			<th scope="col">기술과학</th>
-			<th scope="col">예술</th>
-			<th scope="col">언어</th>
-			<th scope="col">문학</th>
-			<th scope="col">역사</th>
-			<th scope="col">계</th>
-		</tr>
-	</thead>
-	<tbody>
-		<tr>
-			<td>자료수</td>
-			<td>397</td>
-			<td>816</td>
-			<td>333</td>
-			<td>1,740</td>
-			<td>1,104</td>
-			<td>988</td>
-			<td>435</td>
-			<td>259</td>
-			<td>7,911</td>
-			<td>1,400</td>
-			<td>15,383</td>
-		</tr>
-	</tbody>
-</table>
 </div>
 		</div>
 	</div>

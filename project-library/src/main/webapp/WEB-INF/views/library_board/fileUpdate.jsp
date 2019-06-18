@@ -92,7 +92,6 @@
 	<div id="sub_visual" class="sub_img07">
 		<div class="fix-layout">
 			<h2>
-				<img src="/resources/images/icon2.png">
 			</h2>
 		</div>
 	</div>
